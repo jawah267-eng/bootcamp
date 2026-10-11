@@ -1,2 +1,2 @@
 const t1="typescript";
-console.log(t1);
+console.log(`hello ,${t1}`);
