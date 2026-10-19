@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import UserForm from "../components/UserForm";
-import InputField from "../components/UI/InputField";
 import Login from "../components/login";
+import Card from "../components/card";
+
 interface HeaderProps {
   firstlink: string;
   secondlink: string;
@@ -26,6 +27,10 @@ const Main =({children}:{children: React.ReactNode})=>{
 }
 
 const Home = () => {
+  const [formData, setFormData] = useState({ name: '', email: '' });
+  const onSubmit=()=>{
+    alert(`Name: ${formData.name}, Email: ${formData.email}`);
+  }
   return (
     <>
     <div>jawa</div>
@@ -34,9 +39,12 @@ const Home = () => {
   <h1>first</h1>
   <h2>hello</h2>
 </Main>
-<UserForm onSubmit={() => console.log('submitted')} onCancel={() => console.log('cancelled')} />
-  <InputField name="Name" value="John Doe" onchange={() => {}} />
+{/* <UserForm  /> */}
+  {/* <InputField name="Name" value="John Doe" onchange={() => {}} /> */}
+  <UserForm onSubmit={(data) => console.log(data)} formData={formData} setFormData={setFormData} />
+    <UserForm onSubmit={onSubmit} formData={formData} setFormData={setFormData} />
   <Login />
+  <Card />
     </>
 
   )

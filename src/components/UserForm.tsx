@@ -3,24 +3,29 @@ import InputField from './UI/InputField';
 
 interface UserFormProps {
   onSubmit: (data: { name: string; email: string }) => void;
-  onCancel: () => void;
+  formData: { name: string; email: string };
+  setFormData: (data: { name: string; email: string }) => void;
 }
 
-function UserForm({ onSubmit, onCancel }: UserFormProps) {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+function UserForm({ onSubmit, formData ,setFormData }: UserFormProps) {
+ 
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    onSubmit({ name, email });
-  };
-
+  // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   onSubmit({ name, email });
+  // };
+const onCancle=(e)=>{
+  e.preventDefault();
+  setFormData({ name: '', email: '' });
+}
   return (
-    <form onSubmit={handleSubmit}>
-      <InputField name="Name" value={name} onchange={(event) => setName(event.target.value)} />
-      <InputField name="Email" value={email} onchange={(event) => setEmail(event.target.value)} />
+    <form >
+      <InputField name="Name" 
+      value={formData.name}
+       onchange={(e) => setFormData({...formData, name: e.target.value})} />
+      <InputField name="Email" value={formData.email} onchange={(e) => setFormData({...formData, email: e.target.value})} />
       <button type="submit">Submit</button>
-      <button type="button" onClick={onCancel}>Cancel</button>
+      <button type="button" onClick={onCancle}>Cancel</button>
     </form>
   );
 }
